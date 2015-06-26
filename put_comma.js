@@ -8,9 +8,9 @@ if (process.argv.length < 3) { // sample value
 } else {
   num = process.argv[2];
 }
-num_str = num.toString();
+console.log('input: ' + num);
 
-console.log('input: ' + num_str);
+num_str = Number(num).toString();
 
 while (num_str.length > 0) {
   var three_digits = num_str.slice(-3); // get 3 digits
