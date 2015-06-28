@@ -2,10 +2,10 @@ var num;
 var result;
 
 var getIntegerDecimalPart = function(num) {
-   var integer = Math.floor(num);
-   var decimal = (num - integer).toFixed(5); // temporarily, 5 digits to appear after the decimal point
-   var str_decimal = ('0.00000' != decimal) ? decimal.slice(1) : '';
-   return {integer: integer.toString(), decimal: str_decimal};
+  var re = /(\d+)(\.\d+)?/;
+  var found = num.match(re);
+  var decimal = found[2] ? found[2] : '';
+  return {integer: found[1], decimal: decimal};
 };
 
 var getCommaDelimitedIntegerPart = function(str_integer) {
@@ -25,12 +25,13 @@ var getCommaDelimitedIntegerPart = function(str_integer) {
 // check args
 if (process.argv.length < 3) { // sample value
   num = Math.floor(Math.random() * 1000000000) + 1;
+  num = num.toString();
 } else {
   num = process.argv[2];
 }
 console.log('input: ' + num);
 
-var obj_num = getIntegerDecimalPart(Number(num));
+var obj_num = getIntegerDecimalPart(num);
 result = obj_num.decimal;
 result = getCommaDelimitedIntegerPart(obj_num.integer) + result;
 
