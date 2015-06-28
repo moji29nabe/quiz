@@ -24,7 +24,7 @@ var getCommaDelimitedIntegerPart = function(str_integer) {
 
 // check args
 if (process.argv.length < 3) { // sample value
-  num = Math.floor(Math.random() * 1000000000) + 1;
+  num = (Math.random() * 1000000000) + 1;
   num = num.toString();
 } else {
   num = process.argv[2];
