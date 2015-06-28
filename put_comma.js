@@ -1,11 +1,15 @@
 var num;
 var result;
 
-var getIntegerDecimalPart = function(num) {
-  var re = /(\d+)(\.\d+)?/;
+var getParts = function(num) {
+  var re = /(\+|-)?(\d+)(\.\d+)?/;
   var found = num.match(re);
-  var decimal = found[2] ? found[2] : '';
-  return {integer: found[1], decimal: decimal};
+  var decimal = found[3] ? found[3] : '';
+  return {
+    sign: found[1],
+    integer: found[2],
+    decimal: decimal
+  };
 };
 
 var getCommaDelimitedIntegerPart = function(str_integer) {
@@ -31,8 +35,9 @@ if (process.argv.length < 3) { // sample value
 }
 console.log('input: ' + num);
 
-var obj_num = getIntegerDecimalPart(num);
+var obj_num = getParts(num);
 result = obj_num.decimal;
 result = getCommaDelimitedIntegerPart(obj_num.integer) + result;
+result = obj_num.sign ? obj_num.sign + result : result;
 
 console.log(result);
